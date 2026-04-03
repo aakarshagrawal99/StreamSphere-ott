@@ -1,76 +1,28 @@
-// Firebase configuration (your real values)
-const firebaseConfig = {
-  apiKey: "Api_key",
-  authDomain: "streamsphere-b8a5e.firebaseapp.com",
-  projectId: "streamsphere-b8a5e",
-  storageBucket: "streamsphere-b8a5e.firebasestorage.app",
-  messagingSenderId: "667078410126",
-  appId: "1:667078410126:web:980f0a1ce51915065d2edf"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-// Initialize Auth
-const auth = firebase.auth();
-// Test
-console.log("Firebase connected");
+// =======================
+// SIMPLE LOGIN SYSTEM
+// =======================
 
-
-function signUp() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            alert("Signup Successful");
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
-}
-
-
+// EMAIL LOGIN
 function login() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("emailInput").value.trim();
 
-    auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            alert("Login Successful");
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
-}
-
-
-function logout() {
-    auth.signOut()
-        .then(() => {
-            alert("Logged out");
-        });
-}
-
-
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        console.log("User logged in:", user.email);
-    } else {
-        console.log("No user logged in");
+    if (email === "") {
+        alert("Please enter your email");
+        return;
     }
-});
+
+    localStorage.setItem("userEmail", email);
+
+    window.location.href = "platform.html";
+}
 
 
+// GOOGLE LOGIN (SIMULATED)
 function googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    alert("Google login simulated");
 
-    auth.signInWithPopup(provider)
-        .then((result) => {
-            alert("Login Successful");
+    localStorage.setItem("userEmail", "googleuser@gmail.com");
+    localStorage.setItem("userName", "Google User");
 
-            // Redirect
-            window.location.href = "platform.html";
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
+    window.location.href = "platform.html";
 }
