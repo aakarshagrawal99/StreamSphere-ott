@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>StreamSphere</title>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #000;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* CENTER */
+#stage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CLICK AREA */
+#clapperBox {
+  position: relative;
+  cursor: pointer;
+}
+
+/* CLAPPER */
+#clapper {
+  width: 260px;
+}
+
+/* LID */
+#lid {
+  transform-origin: left center;
+}
+
+.lid-open {
+  animation: open 0.18s ease forwards;
+}
+.lid-close {
+  animation: close 0.15s ease forwards;
+}
+
+@keyframes open {
+  to { transform: rotate(-42deg); }
+}
+@keyframes close {
+  to { transform: rotate(0deg); }
+}
+
+/* TEXT */
+#tapText {
+  position: absolute;
+  bottom: 38px;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 5px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Container stays full screen */
+#videoContainer {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0; 
+  background: black;
+  display: none; /* JS turns to flex */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+}
+
+/* Video is maximized but forced to leave a small gap */
+#introVideo {
+  /* This leaves exactly 4% of the screen as a safe margin */
+  width: 96vw;
+  height: 96vh;
+  object-fit: contain; /* Keeps the video from stretching weirdly */
+  position: relative;
+  top: -5vh;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="stage">
+  <div id="clapperBox" onclick="startClap()">
+    <svg id="clapper" viewBox="0 0 200 180">
+      <rect x="20" y="70" width="160" height="100" rx="12" fill="url(#grad1)"/>
+      <g id="lid">
+        <rect x="15" y="40" width="170" height="30" rx="6" fill="#111"/>
+        <rect x="20" y="42" width="25" height="26" fill="#f5c518"/>
+        <rect x="50" y="42" width="25" height="26" fill="#000"/>
+        <rect x="80" y="42" width="25" height="26" fill="#f5c518"/>
+        <rect x="110" y="42" width="25" height="26" fill="#000"/>
+        <rect x="140" y="42" width="25" height="26" fill="#f5c518"/>
+      </g>
+      <defs>
+        <linearGradient id="grad1" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#2a2a2a"/>
+          <stop offset="100%" stop-color="#111"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div id="tapText">TAP TO BEGIN</div>
+  </div>
+</div>
+
+<div id="videoContainer">
+  <video id="introVideo" playsinline>
+    <source src="assets/StreamSphere.mp4" type="video/mp4">
+  </video>
+</div>
+
+<script>
+let clicked = false;
+
+function startClap() {
+  if (clicked) return;
+  clicked = true;
+
+  const lid = document.getElementById("lid");
+  const box = document.getElementById("clapperBox");
+  const videoContainer = document.getElementById("videoContainer");
+  const video = document.getElementById("introVideo");
+
+  lid.classList.add("lid-open");
+
+  setTimeout(() => {
+    lid.classList.remove("lid-open");
+    lid.classList.add("lid-close");
+  }, 150);
+
+  setTimeout(() => {
+    box.style.display = "none";
+    videoContainer.style.display = "flex";
+    video.currentTime = 0;
+    
+    video.muted = false;
+    video.play().then(() => {
+      console.log("Playing with sound");
+    }).catch(() => {
+      video.muted = true;
+      video.play();
+    });
+  }, 300);
+}
+
+document.getElementById("introVideo").addEventListener("ended", function () {
+  window.location.href = "login.html";
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - StreamSphere</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("assets/movie.jpg") no-repeat center center/cover;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: brightness(2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: rgba(20, 20, 20, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            width: 320px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.8);
+        }
+
+        .logo {
+            font-size: 42px;
+            font-weight: 900;
+            color: #e50914;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: none;
+            outline: none;
+            background: #333;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .email-btn {
+            background: #e50914;
+            color: white;
+        }
+
+        .google-btn {
+            background: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .divider {
+            margin: 15px 0;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="overlay">
+    <div class="login-box">
+
+        <div class="logo">SS</div>
+        <h2>Sign In / Sign Up</h2>
+
+        <input type="email" id="emailInput" placeholder="Enter Email">
+
+        <button class="email-btn" id="continueBtn">Continue</button>
+
+        <div class="divider">OR</div>
+
+        <button class="google-btn" id="googleBtn">
+            <img src="https://img.icons8.com/color/48/google-logo.png" class="google-icon">
+            Continue with Google
+        </button>
+
+    </div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script>
+// 🔥 REPLACE WITH YOUR FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyCe5KOK2e_5DuTsSkCmMvzSOdc5q0n-v2g",
+  authDomain: "streamsphere-b8a5e.firebaseapp.com",
+  projectId: "streamsphere-b8a5e",
+  appId: "1:667078410126:web:980f0a1ce51915065d2edf"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+
+// =======================
+// ✅ EMAIL LOGIN
+// =======================
+const continueBtn = document.getElementById("continueBtn");
+const emailInput = document.getElementById("emailInput");
+
+continueBtn.onclick = () => {
+
+    const email = emailInput.value.trim();
+
+    if (email === "") {
+        alert("Please enter your email");
+        return;
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+        alert("Enter a valid email");
+        return;
+    }
+
+    localStorage.setItem("userEmail", email);
+    continueBtn.innerText = "Logging in...";
+    continueBtn.disabled = true;
+
+    // ⏳ 2-second delay
+    setTimeout(() => {
+        window.location.href = "platform.html";
+    }, 2000);
+};
+
+
+// ENTER KEY SUPPORT
+emailInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        continueBtn.click();
+    }
+});
+
+
+// =======================
+// ✅ GOOGLE LOGIN
+// =======================
+const googleBtn = document.getElementById("googleBtn");
+
+googleBtn.onclick = () => {
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    auth.signInWithPopup(provider)
+        .then(result => {
+
+            const user = result.user;
+
+            localStorage.setItem("userEmail", user.email);
+            localStorage.setItem("userName", user.displayName);
+
+            window.location.href = "platform.html";
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+};
+</script>
+
+</body>
+</html>

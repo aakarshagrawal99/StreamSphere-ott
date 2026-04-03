@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Prime Video</title>
+
+<style>
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    /* MATCH YOUR IMAGE COLOR */
+    background: #0f1c2e;
+}
+
+/* ===== OVERLAY ===== */
+.overlay {
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.logo {
+    color: #00A8E1;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.search {
+    position: relative;
+}
+
+/* ===== CATEGORY ===== */
+.category {
+    margin: 25px;
+}
+
+.category h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* ===== ROW ===== */
+.row {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+/* ===== CARDS ===== */
+.movie {
+    min-width: 160px;
+    height: 260px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.movie img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* ===== HOVER ===== */
+.movie:hover {
+    transform: scale(1.1);
+}
+
+/* ===== SCROLLBAR HIDE ===== */
+.row::-webkit-scrollbar {
+    display: none;
+}
+
+#searchResults {
+  display: none;
+  position: fixed;   /* 🔥 makes it separate layer */
+  top: 70px;         /* adjust to your header height */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 70px);
+  overflow-y: auto;  /* scroll only inside search */
+  padding: 20px 40px;
+  box-sizing: border-box;
+  background: #0f1c2e;  /* Prime Video style */
+  z-index: 999;
+}
+
+#searchResults img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border-radius: 6px;
+}
+
+body.search-active {
+  overflow: hidden;
+}
+
+#searchResults h2 {
+  margin-bottom: 20px;
+}
+
+#resultRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+#resultRow .movie {
+  width: 180px;
+  height: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+#resultRow .movie img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+#searchBar {
+  padding: 10px 35px 10px 15px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  width: 250px;
+}
+
+#clearSearch {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">PRIME VIDEO</div>
+
+        <div class="search">
+            <input type="text" id="searchBar" placeholder="Search the movies">
+            <span id="clearSearch">✖</span>
+        </div>
+        <div id="searchResults">
+            <h2 style="color:white; margin-left:20px;">Search Results</h2>
+            <div class="row" id="resultRow"></div>
+        </div>
+        
+    </div>
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <!-- Bollywood -->
+    <div class="category">
+        <h2>Bollywood</h2>
+        <div class="row">
+            <div class="movie" data-title="Baazigar" onclick="playTrailer('OOklnNbA5vo')"><img src="Prime Video/Bollywood/Baazigar.jpg"></div>
+            <div class="movie" data-title="Agneepath" onclick="playTrailer('z0KPQstwMQw')"><img src="Prime Video/Bollywood/Agneepath.jpg"></div>
+            <div class="movie" data-title="Ghajini" onclick="playTrailer('uvh2ca-poRU')"><img src="Prime Video/Bollywood/Ghajini.jpg"></div>
+            <div class="movie" data-title="Hum Apke Hai Koun" onclick="playTrailer('45JY12a6zJA')"><img src="Prime Video/Bollywood/Hum Apke Hai Koun.jpg"></div>
+            <div class="movie" data-title="Kabhi Alvida Naa Kehna" onclick="playTrailer('h9fIHRGZKM0')"><img src="Prime Video/Bollywood/Kabhi Alvida Naa Kehna.jpG"></div>
+            <div class="movie" data-title="Munna Bhai MBBS" onclick="playTrailer('6lCGvu-hwX4')"><img src="Prime Video/Bollywood/Munna Bhai MBBS.jpg"></div>
+            <div class="movie" data-title="Baby John" onclick="playTrailer('qyRn3rPRw8w')"><img src="Prime Video/Bollywood/Baby John.jpg"></div>
+            <div class="movie" data-title="Rockstar" onclick="playTrailer('bD5FShPZdpw')"><img src="Prime Video/Bollywood/Rockstar.jpg"></div>
+            <div class="movie" data-title="Ready" onclick="playTrailer('6ib1KUNMZAw')"><img src="Prime Video/Bollywood/Ready.jpg"></div>
+            <div class="movie" data-title="Singham" onclick="playTrailer('mp-XqCrCi6I')"><img src="Prime Video/Bollywood/Singham.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Action -->
+    <div class="category">
+        <h2>Action-Packed</h2>
+        <div class="row">
+            <div class="movie" data-title="Pathaan" onclick="playTrailer('vqu4z34wENw')"><img src="Prime Video/Action-Packed/Pathaan.jpg"></div>
+            <div class="movie" data-title="KGF Chapter 1" onclick="playTrailer('-KfsY-qwBS0')"><img src="Prime Video/Action-Packed/KGF Chapter 1.jpg"></div>
+            <div class="movie" data-title="KGF Chapter 2" onclick="playTrailer('JKa05nyUmuQ')"><img src="Prime Video/Action-Packed/KGF Chapter 2.jpg"></div>
+            <div class="movie" data-title="Pushpa The Rise" onclick="playTrailer('pKctjlxbFDQ')"><img src="Prime Video/Action-Packed/Pushpa The Rise.jpg"></div>
+            <div class="movie" data-title="Jailer" onclick="playTrailer('a0Ouzf0bfpE')"><img src="Prime Video/Action-Packed/Jailer.jpg"></div>
+            <div class="movie" data-title="Tiger 3" onclick="playTrailer('vEjTUDjjU6A')"><img src="Prime Video/Action-Packed/Tiger 3.jpg"></div>
+            <div class="movie" data-title="Shershaah" onclick="playTrailer('Q0FTXnefVBA')"><img src="Prime Video/Action-Packed/Shershaah.jpg"></div>
+            <div class="movie" data-title="Holiday" onclick="playTrailer('bXGxcBYeRsw')"><img src="Prime Video/Action-Packed/Holiday.jpg"></div>
+            <div class="movie" data-title="Batla House" onclick="playTrailer('dG3K6jB3iW8')"><img src="Prime Video/Action-Packed/Batla House.jpg"></div>
+            <div class="movie" data-title="Yodha" onclick="playTrailer('3AuB8RTfBJc')"><img src="Prime Video/Action-Packed/Yodha.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Romance -->
+    <div class="category">
+        <h2>Romance</h2>
+        <div class="row">
+            <div class="movie" data-title="Kabhi Khushi Kabhi Gham" onclick="playTrailer('7uY1JbWZKPA')"><img src="Prime Video/Romance/Kabhi Khushi Kabhie Gham.jpg"></div>
+            <div class="movie" data-title="Kalank" onclick="playTrailer('qeCi8IKZ3Fg')"><img src="Prime Video/Romance/Kalank.jpg"></div>
+            <div class="movie" data-title="Rocky Or Rani Ki Prem Kahani" onclick="playTrailer('6mdxy3zohEk')"><img src="Prime Video/Romance/Rocky Aur Rani Ki Prem Kahani.jpg"></div>
+            <div class="movie" data-title="Jab We Met" onclick="playTrailer('VoaKuOjez9k')"><img src="Prime Video/Romance/Jab We Met.jpg"></div>
+            <div class="movie" data-title="Ajab Prem Ki Ghazab Kahani" onclick="playTrailer('Ag4N6rCj0VA')"><img src="Prime Video/Romance/Ajab Prem Ki Ghazab Kahani.jpg"></div>
+            <div class="movie" data-title="Raanjhanaa" onclick="playTrailer('ER9vmhxFucg')"><img src="Prime Video/Romance/Raanjhanaa.jpg"></div>
+            <div class="movie" data-title="Satyaprem Ki Katha" onclick="playTrailer('8EPJiFfWRfw')"><img src="Prime Video/Romance/Satyaprem Ki Katha.jpg"></div>
+            <div class="movie" data-title="Sita Raman" onclick="playTrailer('PFcE1Rw5lmo')"><img src="Prime Video/Romance/Sita Raman.jpg"></div>
+            <div class="movie" data-title="Kapoor & Sons" onclick="playTrailer('s7YYt9_KfsM')"><img src="Prime Video/Romance/Kapoor & Sons.jpg"></div>
+            <div class="movie" data-title="Love Aaj Kal" onclick="playTrailer('dLH1gmk9_iE')"><img src="Prime Video/Romance/Love Aaj Kal.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Thriller / Mystery -->
+     <div class="category">
+        <h2>Thriller/Mystery</h2>
+        <div class="row">
+            <div class="movie" data-title="Drishyam 2" onclick="playTrailer('cxA2y9Tgl7o')"><img src="Prime Video/Thriller Mystery/Drishyam 2.avif"></div>
+            <div class="movie" data-title="Kahaani" onclick="playTrailer('rsjamVgPoI8')"><img src="Prime Video/Thriller Mystery/Kahaani.jpg"></div>
+            <div class="movie" data-title="Section 375" onclick="playTrailer('UWjxS8EJ4Z8')"><img src="Prime Video/Thriller Mystery/Section 375.jpg"></div>
+            <div class="movie" data-title="Pink" onclick="playTrailer('AL2TShb6fFs')"><img src="Prime Video/Thriller Mystery/Pink.jpg"></div>
+            <div class="movie" data-title="Wazir" onclick="playTrailer('gdwM7xKOph0')"><img src="Prime Video/Thriller Mystery/Wazir.jpg"></div>
+            <div class="movie" data-title="NH10" onclick="playTrailer('A9icNqWlylw')"><img src="Prime Video/Thriller Mystery/NH10.jpg"></div>
+            <div class="movie" data-title="Johnny Gaddaar" onclick="playTrailer('iZCxKgD5yiw')"><img src="Prime Video/Thriller Mystery/Johnny Gaddaar.jpg"></div>
+            <div class="movie" data-title="Table No 21" onclick="playTrailer('SsC1MI9NvSs')"><img src="Prime Video/Thriller Mystery/Table No 21.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Sci-Fi / Fantasy -->
+     <div class="category">
+        <h2>Sci-Fi/Fantasy</h2>
+        <div class="row">
+            <div class="movie" data-title="Ra.One" onclick="playTrailer('pBud7byobX0')"><img src="Prime Video/Sci-fi fantasy/Ra.One.jpg"></div>
+            <div class="movie" data-title="2.0" onclick="playTrailer('_qOl_7qfPOM')"><img src="Prime Video/Sci-fi fantasy/2.0.jpg"></div>
+            <div class="movie" data-title="Tumbbad" onclick="playTrailer('YGIcZrUBY0k')"><img src="Prime Video/Sci-fi fantasy/Tumbbad.jpg"></div>
+            <div class="movie" data-title="Ram Setu" onclick="playTrailer('VgGgYOzNWno')"><img src="Prime Video/Sci-fi fantasy/Ram Setu.jpeg"></div>
+            <div class="movie" data-title="Stree 2" onclick="playTrailer('VlvOgk5BHS4')"><img src="Prime Video/Sci-fi fantasy/Stree 2.jpg"></div>
+            <div class="movie" data-title="Thamma" onclick="playTrailer('Mod_oXpftJA')"><img src="Prime Video/Sci-fi fantasy/Thamma.jpg"></div>
+            <div class="movie" data-title="Bhootnath" onclick="playTrailer('GdJ8rg8Em40')"><img src="Prime Video/Sci-fi fantasy/Bhootnath.jpg"></div>
+            <div class="movie" data-title="Thank God" onclick="playTrailer('sgnhYJGOA')"><img src="Prime Video/Sci-fi fantasy/Thank God.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Comedy -->
+     <div class="category">
+        <h2>Comedy</h2>
+        <div class="row">
+            <div class="movie" data-title="3 Idiots" onclick="playTrailer('K0eDlFX9GMc')"><img src="Prime Video/Comedy/3 Idiots.jpg"></div>
+            <div class="movie" data-title="Double Dhamaal" onclick="playTrailer('zkIfgcl0sG0')"><img src="Prime Video/Comedy/Double Dhamaal.jpg"></div>
+            <div class="movie" data-title="Golmaal Fun Unlimited" onclick="playTrailer('3fO1f9TndAM')"><img src="Prime Video/Comedy/Golmaal Fun Unlimited.jpg"></div>
+            <div class="movie" data-title="Golmaal Returns" onclick="playTrailer('jAw46WCmTN4')"><img src="Prime Video/Comedy/Golmaal Returns.jpg"></div>
+            <div class="movie" data-title="Golmaal 3" onclick="playTrailer('oFerQZDEn8E')"><img src="Prime Video/Comedy/Golmaal 3.jpg"></div>
+            <div class="movie" data-title="Golmaal Again" onclick="playTrailer('VgQUwsUHdqc')"><img src="Prime Video/Comedy/Golmaal Again.jpg"></div>
+            <div class="movie" data-title="Hera Pheri" onclick="playTrailer('m1zMmVwWr-M')"><img src="Prime Video/Comedy/Hera Pheri.jpg"></div>
+            <div class="movie" data-title="Welcome"><img src="Prime Video/Comedy/Welcome.jpg"></div>
+            <div class="movie" data-title="No Entry"><img src="Prime Video/Comedy/No Entry.jpg"></div>
+            <div class="movie" data-title="Dhamaal"><img src="Prime Video/Comedy/Dhamaal.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Period -->
+     <div class="category">
+        <h2>Period</h2>
+        <div class="row">
+            <div class="movie" data-title="Bajirao Mastani" onclick="playTrailer('eHOc-4D7MjY')"><img src="Prime Video/Period/Bajirao Mastani.jpg"></div>
+            <div class="movie" data-title="Kesari" onclick="playTrailer('JFP24D15_XM')"><img src="Prime Video/Period/Kesari.jpg"></div>
+            <div class="movie" data-title="Goliyon Ki Raasleela Ramleela" onclick="playTrailer('YQPfeinXxcA')"><img src="Prime Video/Period/Goliyon Ki Raasleela Raamleela.jpg"></div>
+            <div class="movie" data-title="Mangal Pandey The Rising" onclick="playTrailer('5iIIaoJ9qKU')"><img src="Prime Video/Period/Mangal Pandey The Rising.jpg"></div>
+            <div class="movie" data-title="Sardar Udham" onclick="playTrailer('bLWgKt1-SYo')"><img src="Prime Video/Period/Sardar Udham.jpg"></div>
+            <div class="movie" data-title="Gadar Ek Prem Katha" onclick="playTrailer('JADZLy5HEPo')"><img src="Prime Video/Period/Gadar Ek Prem Katha.jpg"></div>
+            <div class="movie" data-title="Gadar 2" onclick="playTrailer('mljj92tRwlk')"><img src="Prime Video/Period/Gadar 2.jpg"></div>
+            <div class="movie" data-title="Gandhi My Father" onclick="playTrailer('E0jFSgXxZE8')"><img src="Prime Video/Period/Gandhi My Father.jpg"></div>
+            <div class="movie" data-title="Samrat Prithviraj" onclick="playTrailer('33-CQdPHyjw')"><img src="Prime Video/Period/Samrat Prithviraj.jpg"></div>
+            <div class="movie" data-title="Manikarnika The Queen Of Jhansi" onclick="playTrailer('tKmkMVaNu9g')"><img src="Prime Video/Period/Manikarnika The Queen Of Jhansi.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Biography -->
+     <div class="category">
+        <h2>Biography</h2>
+        <div class="row">
+            <div class="movie" data-title="Bhaag Milkha Bhaag" onclick="playTrailer('WbblCMem1ME')"><img src="Prime Video/Biography/Bhaag Milkha Bhaag.jpg"></div>
+            <div class="movie" data-title="Rocketry The Nambi Effect" onclick="playTrailer('wwGbt878_g0')"><img src="Prime Video/Biography/Rocketry The Nambi Effect.jpg"></div>
+            <div class="movie" data-title="Chandu Champion" onclick="playTrailer('IHQQK_Wn5DM')"><img src="Prime Video/Biography/Chandu Champion.jpg"></div>
+            <div class="movie" data-title="Airlift" onclick="playTrailer('vb5xCMbMfZ0')"><img src="Prime Video/Biography/Airlift.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Sports Drama -->
+     <div class="category">
+        <h2>Sports Drama</h2>
+        <div class="row">
+            <div class="movie" data-title="Maidaan" onclick="playTrailer('kDzAKXNnAVA')"><img src="Prime Video/Sports Drama/Maidaan.jpg"></div>
+            <div class="movie" data-title="Brothers" onclick="playTrailer('QuRSCU0tOKs')"><img src="Prime Video/Sports Drama/Brothers.jpeg"></div>
+            <div class="movie" data-title="Toofan" onclick="playTrailer('4qalsBNwZds')"><img src="Prime Video/Sports Drama/Toofan.jpg"></div>
+            <div class="movie" data-title="Saina" onclick="playTrailer('55XTHZtWtH4')"><img src="Prime Video/Sports Drama/Saina.jpg"></div>
+            <div class="movie" data-title="22 Yards" onclick="playTrailer('EjJhAQAZ5xk')"><img src="Prime Video/Sports Drama/22 Yards.jpeg"></div>
+            <div class="movie" data-title="Iqbal" onclick="playTrailer('TE0YDKgcuN8')"><img src="Prime Video/Sports Drama/Iqbal.jpg"></div>
+            <div class="movie" data-title="Ferrari Ki Sawaari" onclick="playTrailer('NWyV5z_q-To')"><img src="Prime Video/Sports Drama/Ferrari Ki Sawaari.jpg"></div>
+            <div class="movie" data-title="Chhalaang" onclick="playTrailer('BY-0SbSF2dE')"><img src="Prime Video/Sports Drama/Chhalaang.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Animations -->
+     <div class="category">
+        <h2>Action-Packed</h2>
+        <div class="row">
+            <div class="movie" data-title="Bal Ganesh" onclick="playTrailer('fw6z1TVENfE')"><img src="Prime Video/Animations/Bal Ganesh.jpg"></div>
+            <div class="movie" data-title="Bal Ganesh 2" onclick="playTrailer('1Bpgmv3HTYs')"><img src="Prime Video/Animations/Bal Ganesh 2.jpg"></div>
+            <div class="movie" data-title="Bal Ganesh 3" onclick="playTrailer('ySjmbxxvv4k')"><img src="Prime Video/Animations/Bal Ganesh 3.jpg"></div>
+            <div class="movie" data-title="Krishna Aur Kans" onclick="playTrailer('rdxyzJCHQk4')"><img src="Prime Video/Animations/Krishna Aur Kans.gif"></div>
+            <div class="movie" data-title="Chhota Bheem And Krishna In The Movie Pataliputra City Of The Dead" onclick="playTrailer('7UWqtwTfF7s')"><img src="Prime Video/Animations/Chhota Bheem And Krishna In The Movie Pataliputra City Of The Dead.jpg"></div>
+            <div class="movie" data-title="hhota Bheem And The Throne Of Bali" onclick="playTrailer('H7Ht-m2QMDY')"><img src="Prime Video/Animations/Chhota Bheem And The Throne Of Bali.jpg"></div>
+            <div class="movie" data-title="Chhota Bheem Himalayan Adventure" onclick="playTrailer('o-_etNWpRrc')"><img src="Prime Video/Animations/Chhota Bheem Himalayan Adventure.jpg"></div>
+            <div class="movie" data-title="Chhota Bheem Kung Fu Dhamaka" onclick="playTrailer('aN48fRtIZdo')"><img src="Prime Video/Animations/Chhota Bheem Kung Fu Dhamaka.jpg"></div>
+            <div class="movie" data-title="Mahabharat" onclick="playTrailer('cSFW55HB-a8')"><img src="Prime Video/Animations/Mahabharat.jpg"></div>
+            <div class="movie" data-title="Appu" onclick="playTrailer('tdQveqDL4ms')"><img src="Prime Video/Animations/Appu.jpg"></div>
+        </div>
+    </div>
+
+</div>
+<!-- TRAILER POPUP -->
+<div id="trailerPopup" style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+">
+
+    <div style="position:relative; width:80%; max-width:900px;">
+        
+        <!-- CLOSE BUTTON -->
+        <span onclick="closeTrailer()" style="
+            position:absolute;
+            top:-30px;
+            right:0;
+            color:white;
+            font-size:30px;
+            cursor:pointer;
+        ">✖</span>
+
+        <!-- YOUTUBE IFRAME -->
+        <iframe id="trailerFrame"
+            width="100%"
+            height="500"
+            src=""
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+</div>
+<script>
+function playTrailer(videoId) {
+    const popup = document.getElementById("trailerPopup");
+    const frame = document.getElementById("trailerFrame");
+
+    frame.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+    popup.style.display = "flex";
+}
+
+function closeTrailer() {
+    const popup = document.getElementById("trailerPopup");
+    const frame = document.getElementById("trailerFrame");
+
+    frame.src = ""; // stop video
+    popup.style.display = "none";
+}
+
+// 🔍 SEARCH LOGIC (PRIME VIDEO)
+
+const searchBar = document.getElementById("searchBar");
+const clearBtn = document.getElementById("clearSearch");
+
+const resultBox = document.getElementById("searchResults");
+const resultRow = document.getElementById("resultRow");
+
+searchBar.addEventListener("input", function () {
+
+  const input = this.value.trim().toLowerCase();
+  const movies = document.querySelectorAll(".movie");
+
+  // clear previous results
+  resultRow.innerHTML = "";
+
+  if (input === "") {
+
+    resultBox.style.display = "none";
+
+    // show homepage again
+    document.querySelectorAll(".section").forEach(sec => {
+      sec.style.display = "block";
+    });
+
+    // 🔥 allow scroll again
+    document.body.classList.remove("search-active");
+
+    return;
+  }
+
+  let seen = new Set();
+  let found = 0;
+
+  movies.forEach(movie => {
+
+    const title = movie.getAttribute("data-title");
+
+    if (title && title.toLowerCase().includes(input)) {
+
+      if (!seen.has(title)) {
+        seen.add(title);
+
+        const clone = movie.cloneNode(true);
+        resultRow.appendChild(clone);
+
+        found++;
+      }
+    }
+  });
+
+  resultBox.style.display = found > 0 ? "block" : "none";
+
+  // 🔥 hide homepage completely
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.display = "none";
+  });
+
+  // 🔥 stop background scroll
+  document.body.classList.add("search-active");
+
+});
+
+
+// ❌ CLEAR BUTTON
+clearBtn.onclick = () => {
+
+  searchBar.value = "";
+  resultRow.innerHTML = "";
+
+  resultBox.style.display = "none";
+
+  // show homepage again
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.display = "block";
+  });
+
+  // 🔥 enable scroll again
+  document.body.classList.remove("search-active");
+};
+</script>
+</body>
+</html>

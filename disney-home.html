@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Disney+</title>
+
+<style>
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+     overflow-x: hidden;
+    /* DISNEY+ DARK BLUE (same as your image) */
+    background: #021b4e;
+}
+
+/* ===== OVERLAY ===== */
+.overlay {
+    background: rgba(0,0,0,0.5);
+    min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.logo {
+    color: #00A8E1;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.search {
+    position: relative;
+}
+
+#searchBar {
+  padding: 10px 40px 10px 15px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  width: 250px;
+}
+
+/* Clear button */
+#clearSearch {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* SEARCH RESULTS FULL PAGE */
+#searchResults {
+  display: none;
+  position: fixed;   /* 🔥 IMPORTANT */
+  top: 80px;         /* height of header */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 80px);
+  overflow-y: auto;  /* scroll only inside search */
+  padding: 20px 40px;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, #0c111b, #090b13);
+  z-index: 999;      /* 🔥 stays above homepage */
+}
+
+/* Movie row */
+.movie-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+body.search-active {
+    overflow: hidden;
+    height: 100vh;
+}
+body.search-active .section {
+  display: none;
+}
+
+/* ===== CATEGORY ===== */
+.category {
+    margin: 25px;
+}
+
+.category h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* ===== ROW ===== */
+.row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+/* ===== CARD ===== */
+.movie {
+    min-width: 180px;
+    height: 260px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.movie img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    
+}
+
+.movie:hover {
+    transform: scale(1.08);
+}
+
+/* ===== SCROLLBAR HIDE ===== */
+.row::-webkit-scrollbar {
+    display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">DISNEY+</div>
+        <div class="search">
+            <input type="text" id="searchBar" placeholder="Search movies">
+            <span id="clearSearch">✖</span>
+        </div>
+        <div id="searchResults">
+           <h2 style="color:white;margin-left:20px;">Search Results</h2>
+           <div id="resultRow" class="movie-row"></div>
+        </div>
+    </div>
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <!-- Bollywood -->
+    <div class="category">
+        <h2>Bollywood</h2>
+        <div class="row">
+            <div class="movie" data-title="Dhurandhar The Revenge" onclick="playTrailer('NHk7scrb_9I')"><img src="Disney/Bollywood/Dhurandhar The Revenge.jpg"></div>
+            <div class="movie" data-title="Kabir Singh" onclick="playTrailer('RiANSSgCuJk')"><img src="Disney/Bollywood/Kabir Singh.jpg"></div>
+            <div class="movie" data-title="Shootout At Lokhandwala" onclick="playTrailer('zafeG8_n52Y')"><img src="Disney/Bollywood/Shootout At Lokhandwala.jpg"></div>
+            <div class="movie" data-title="Vikram Vedha" onclick="playTrailer('hpwnlr-ZHB0')"><img src="Disney/Bollywood/Vikram Vedha.jpg"></div>
+            <div class="movie" data-title="Deewana" onclick="playTrailer('QriTGrXdmZ8')"><img src="Disney/Bollywood/Deewana.jpg"></div>
+            <div class="movie" data-title="Bhootnath Returns" onclick="playTrailer('BpC-Owk5MNY')"><img src="Disney/Bollywood/Bhootnath Returns.jpg"></div>
+            <div class="movie" data-title="Partner" onclick="playTrailer('75Ko96Uqh14')"><img src="Disney/Bollywood/Partner.jpg"></div>
+            <div class="movie" data-title="Raja Hindustani" onclick="playTrailer('UysNzAH4xHc')"><img src="Disney/Bollywood/Raja Hindustani.jpg"></div>
+            <div class="movie" data-title="Tubelight" onclick="playTrailer('PGQRNKHJwH4')"><img src="Disney/Bollywood/Tubelight.jpg"></div>
+            <div class="movie" data-title="Total Dhamaal" onclick="playTrailer('fo9EhcwQXcM')"><img src="Disney/Bollywood/Total Dhamaal.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Action -->
+    <div class="category">
+        <h2>Action-Packed</h2>
+        <div class="row">
+            <div class="movie" data-title="Kill" onclick="playTrailer('da7lKeeS67c')"><img src="Disney/Action-Packed/Kill.jpg"></div>
+            <div class="movie" data-title="Salaar Part1 Ceasefire" onclick="playTrailer('HihakYi5M2I')"><img src="Disney/Action-Packed/Salaar Part1 Ceasefire.jpg"></div>
+            <div class="movie" data-title="Vikram" onclick="playTrailer('L4LWIXngIG0')"><img src="Disney/Action-Packed/Vikram.jpg"></div>
+            <div class="movie" data-title="Marco" onclick="playTrailer('AdwGOloQcAs')"><img src="Disney/Action-Packed/Marco.jpg"></div>
+            <div class="movie" data-title="Baby" onclick="playTrailer('-Yu_2nyOP5o')"><img src="Disney/Action-Packed/Baby.jpg"></div>
+            <div class="movie" data-title="Aavesham" onclick="playTrailer('UttccYQXpTM')"><img src="Disney/Action-Packed/Aavesham.jpg"></div>
+            <div class="movie" data-title="Bhuj The Pride Of India" onclick="playTrailer('YngLZzBuzHA')"><img src="Disney/Action-Packed/Bhuj The Pride Of India.jpg"></div>
+            <div class="movie" data-title="Baaghi 3" onclick="playTrailer('jQzDujMzfoU')"><img src="Disney/Action-Packed/Baaghi 3.jpg"></div>
+            <div class="movie" data-title="IB71" onclick="playTrailer('-V9tu8rqWIg')"><img src="Disney/Action-Packed/IB71.jpg"></div>
+            <div class="movie" data-title="Khuda Haafiz" onclick="playTrailer('q67l_GOUzGc')"><img src="Disney/Action-Packed/Khuda Haafiz.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Thriller/Mystery -->
+      <div class="category">
+        <h2>Thriller/Mystery</h2>
+        <div class="row">
+            <div class="movie" data-title="A Thursday" onclick="playTrailer('7O_96yftBRc')"><img src="Disney/Thriller Mystery/A Thursday.jpg"></div>
+            <div class="movie" data-title="Freddy" onclick="playTrailer('dx1mga5gFbY')"><img src="Disney/Thriller Mystery/Freddy.jpg"></div>
+            <div class="movie" data-title="Raid" onclick="playTrailer('3h4thS-Hcrk')"><img src="Disney/Thriller Mystery/Raid.jpg"></div>
+            <div class="movie" data-title="Gaslight" onclick="playTrailer('bA00GJQbS1s')"><img src="Disney/Thriller Mystery/Gaslight.jpg"></div>
+            <div class="movie" data-title="Maestro" onclick="playTrailer('0OCcQMu3H58')"><img src="Disney/Thriller Mystery/Maestro.jpg"></div>
+            <div class="movie" data-title="Cuttputlli" onclick="playTrailer('J6DZITPRrU8')"><img src="Disney/Thriller Mystery/Cuttputlli.jpeg"></div>
+            <div class="movie" data-title="Cadaver" onclick="playTrailer('foSlB_cTXrI')"><img src="Disney/Thriller Mystery/Cadaver.jpg"></div>
+            <div class="movie" data-title="Apurva" onclick="playTrailer('YtVH3qz_XUA')"><img src="Disney/Thriller Mystery/Apurva.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Sci-Fi/Fantasy -->
+      <div class="category">
+        <h2>Sci-Fi/Fantasy</h2>
+        <div class="row">
+            <div class="movie" data-title="Brahmastra Part One Shiva" onclick="playTrailer('BUjXzrgntcY')"><img src="Disney/Sci-fi fantasy/Brahmastra Part One Shiva.jpg"></div>
+            <div class="movie" data-title="Hanu-Man" onclick="playTrailer('MKqJBhOgapM')"><img src="Disney/Sci-fi fantasy/Hanu-Man.jpeg"></div>
+            <div class="movie" data-title="Robinhood" onclick="playTrailer('1C7JVVxS7Sk')"><img src="Disney/Sci-fi fantasy/Robinhood.jpg"></div>
+            <div class="movie" data-title="The Raja Saab" onclick="playTrailer('wT4HcYAeV5U')"><img src="Disney/Sci-fi fantasy/The Raja Saab.jpg"></div>
+            <div class="movie" data-title="Teddy" onclick="playTrailer('-JhoDh5VxCY')"><img src="Disney/Sci-fi fantasy/Teddy.jpg"></div>
+            <div class="movie" data-title="Aparichit" onclick="playTrailer('JFJCDxNayl4')"><img src="Disney/Sci-fi fantasy/Aparichit.webp"></div>
+        </div>
+    </div>
+
+    <!-- Comedy -->
+      <div class="category">
+        <h2>Comedy</h2>
+        <div class="row">
+            <div class="movie" data-title="Chhichhore" onclick="playTrailer('tsxemFX0a7k')"><img src="Disney/Comedy/Chhichhore.jpg"></div>
+            <div class="movie" data-title="Bala" onclick="playTrailer('veJ6ejMjzgE')"><img src="Disney/Comedy/Bala.jpg"></div>
+            <div class="movie" data-title="Housefull 3" onclick="playTrailer('TlZM9kuqw38')"><img src="Disney/Comedy/Housefull 3.jpg"></div>
+            <div class="movie" data-title="Housefull 4" onclick="playTrailer('gcHH34cEl3Y')"><img src="Disney/Comedy/Housefull 4.jpg"></div>
+            <div class="movie" data-title="Badhaai Do" onclick="playTrailer('HpMsvH7DpPc')"><img src="Disney/Comedy/Badhaai Do.jpg"></div>
+            <div class="movie" data-title="De De Pyaar De" onclick="playTrailer('EJUD2PptXrk')"><img src="Disney/Comedy/De De Pyaar De.jpg"></div>
+            <div class="movie" data-title="Hungama 2" onclick="playTrailer('RC8dHEENNHQ')"><img src="Disney/Comedy/Hungama 2.jpg"></div>
+            <div class="movie" data-title="Kis KisKo Pyaar Karoon 2" onclick="playTrailer('Eb9fIMlIiyc')"><img src="Disney/Comedy/Kis Kisko Pyaar Karoon 2.jpg"></div>
+            <div class="movie" data-title="Hum Do Humare Do" onclick="playTrailer('t3efdEAkMgQ')"><img src="Disney/Comedy/Hum Do Humare Do.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Horror -->
+      <div class="category">
+        <h2>Horror</h2>
+        <div class="row">
+            <div class="movie" data-title="Bhediya" onclick="playTrailer('d_BPlvbw_ok')"><img src="Disney/Horror/Bhediya.jpg"></div>
+            <div class="movie" data-title="Munjya" onclick="playTrailer('8X3uF80H5LU')"><img src="Disney/Horror/Munjya.jpg"></div>
+            <div class="movie" data-title="Vikrant Rona" onclick="playTrailer('VV9SfpGRVFw')"><img src="Disney/Horror/Vikrant Rona.jpg"></div>
+            <div class="movie" data-title="Pizza" onclick="playTrailer('i5GtgmlWTXE')"><img src="Disney/Horror/Pizza.jpg"></div>
+            <div class="movie" data-title="Bhoot Police" onclick="playTrailer('j7mGq3s3eA')"><img src="Disney/Horror/Bhoot Police.jpg"></div>
+            <div class="movie" data-title="Laxmii" onclick="playTrailer('AzTYIiRYmv0')"><img src="Disney/Horror/Laxmii.jpg"></div>
+            <div class="movie" data-title="Bloody Ishq" onclick="playTrailer('dlV48PvrJ8E')"><img src="Disney/Horror/Bloody Ishq.jpg"></div>
+            <div class="movie" data-title="1920 Horrors Of The Heart" onclick="playTrailer('cLthAiz_PnQ')"><img src="Disney/Horror/1920 Horrors Of The Heart.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Biography -->
+      <div class="category">
+        <h2>Biography</h2>
+        <div class="row">
+            <div class="movie" data-title="Tanhaji The Unsung Warrior" onclick="playTrailer('cffAGIYTEHU')"><img src="Disney/Biography/Tanhaji The Unsung Warrior.jpg"></div>
+            <div class="movie" data-title="Super 30" onclick="playTrailer('QpvEWVVnICE')"><img src="Disney/Biography/Super 30.jpg"></div>
+            <div class="movie" data-title="Mission Mnagal" onclick="playTrailer('q10nfS9V090')"><img src="Disney/Biography/Mission Mangal.jpg"></div>
+            <div class="movie" data-title="Neerja" onclick="playTrailer('aHza99Hc3lQ')"><img src="Disney/Biography/Neerja.jpg"></div>
+            <div class="movie" data-title="Srikanth" onclick="playTrailer('OMeuJP5iBWY')"><img src="Disney/Biography/Srikanth.jpg"></div>
+            <div class="movie" data-title="Sarfira" onclick="playTrailer('8Iy2geJD8HY')"><img src="Disney/Biography/Sarfira.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Sports Drama -->
+      <div class="category">
+        <h2>Sports Drama</h2>
+        <div class="row">
+            <div class="movie" data-title="Gold" onclick="playTrailer('Pcv0aoOlsLM')"><img src="Disney/Sports Drama/Gold.jpg"></div>
+            <div class="movie" data-title="MS Dhoni The Untold Story" onclick="playTrailer('6L6XqWoS8tw')"><img src="Disney/Sports Drama/MS Dhoni The Untold Story.jpg"></div>
+            <div class="movie" data-title="Kaun Pravin Tambe" onclick="playTrailer('5XZia9c4fVU')"><img src="Disney/Sports Drama/Kuan Pravin Tambe.jpeg"></div>
+            <div class="movie" data-title="800" onclick="playTrailer('8jYz0CR6oYY')"><img src="Disney/Sports Drama/800.jpg"></div>
+            <div class="movie" data-title="Liger" onclick="playTrailer('TgcruVx0dNM')"><img src="Disney/Sports Drama/Liger.jpg"></div>
+            <div class="movie" data-title="Panga" onclick="playTrailer('QDP6tCC8zTo')"><img src="Disney/Sports Drama/Panga.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Animations -->
+      <div class="category">
+        <h2>Animations</h2>
+        <div class="row">
+            <div class="movie" data-title="The Lion King" onclick="playTrailer('7TavVZMewpY')"><img src="Disney/Animations/The Lion King.jpg"></div>
+            <div class="movie" data-title="Mufasa The Lion King" onclick="playTrailer('oelsxH0orHI')"><img src="Disney/Animations/Mufasa The Lion King.jpg"></div>
+            <div class="movie" data-title="Cars" onclick="playTrailer('W_H7_tDHFE8')"><img src="Disney/Animations/Cars.jpg"></div>
+            <div class="movie" data-title="Cars2" onclick="playTrailer('lg5hj2c5Nkk')"><img src="Disney/Animations/Cars2.jpg"></div>
+            <div class="movie" data-title="Cars3" onclick="playTrailer('2LeOH9AGJQM')"><img src="Disney/Animations/Cars3.jpeg"></div>
+            <div class="movie" data-title="Motu Patlu Kung Fu Kings"><img src="Disney/Animations/Motu Patlu Kung Fu Kings.jpg"></div>
+            <div class="movie" data-title="Motu Patlu Kung Fu Kings Returns"><img src="Disney/Animations/Motu Patlu Kung Fu Kings Returns.jpg"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- TRAILER POPUP -->
+<div id="trailerPopup" style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+">
+
+    <div style="position:relative; width:80%; max-width:900px;">
+        
+        <!-- CLOSE BUTTON -->
+        <span onclick="closeTrailer()" style="
+            position:absolute;
+            top:-30px;
+            right:0;
+            color:white;
+            font-size:30px;
+            cursor:pointer;
+        ">✖</span>
+
+        <!-- YOUTUBE IFRAME -->
+        <iframe id="trailerFrame"
+            width="100%"
+            height="500"
+            src=""
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+</div>
+<script>
+function playTrailer(videoId) {
+    const popup = document.getElementById("trailerPopup");
+    const frame = document.getElementById("trailerFrame");
+
+    frame.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+    popup.style.display = "flex";
+}
+
+function closeTrailer() {
+    const popup = document.getElementById("trailerPopup");
+    const frame = document.getElementById("trailerFrame");
+
+    frame.src = ""; // stop video
+    popup.style.display = "none";
+}
+
+const searchBar = document.getElementById("searchBar");
+const clearBtn = document.getElementById("clearSearch");
+
+searchBar.addEventListener("input", function () {
+
+  let input = this.value.toLowerCase().trim();
+  if (input === "") {
+    document.body.classList.remove("search-active");
+  } else {
+    document.body.classList.add("search-active");
+  }
+
+  let movies = document.querySelectorAll(".movie");
+
+  let resultBox = document.getElementById("searchResults");
+  let resultRow = document.getElementById("resultRow");
+
+  resultRow.innerHTML = "";
+
+  if (input === "") {
+    resultBox.style.display = "none";
+
+    return;
+  }
+
+  let addedTitles = new Set(); // 🔥 prevents duplicates
+
+  movies.forEach(movie => {
+    let title = movie.getAttribute("data-title");
+
+    if (title && title.toLowerCase().includes(input)) {
+
+      if (!addedTitles.has(title)) {
+
+        let clone = movie.cloneNode(true);
+        resultRow.appendChild(clone);
+
+        addedTitles.add(title);
+      }
+    }
+  });
+
+  resultBox.style.display = "block";
+
+  // 🔥 hide homepage completely
+ if (input === "") {
+  // show homepage
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.display = "block";
+  });
+} else {
+  // hide homepage completely
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.display = "none";
+  });
+}
+
+});
+
+clearBtn.onclick = () => {
+
+  searchBar.value = "";
+
+  document.getElementById("searchResults").style.display = "none";
+
+  document.body.classList.remove("search-active");
+
+  clearBtn.style.display = "none";
+};
+
+</script>
+
+</body>
+</html>

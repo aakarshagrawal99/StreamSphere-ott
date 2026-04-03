@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prime Video</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;   /* 🔥 removes ALL scrollbars */
+            height: 100%;
+            background: black;
+        }
+
+        video {
+            position: fixed;   /* 🔥 prevents overflow issues */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+<video id="intro" autoplay>
+    <source src="assets/primevideo.mp4" type="video/mp4">
+</video>
+
+<script>
+const video = document.getElementById("intro");
+
+// autoplay fallback
+video.play().catch(() => {
+    document.body.onclick = () => video.play();
+});
+
+// redirect after animation
+video.onended = () => {
+    window.location.replace("primevideo-home.html");
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Netflix Home</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    overflow-x: hidden;
+    font-family: Arial;
+}
+
+/* 🔥 HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+}
+
+/* logo */
+.logo {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* search */
+.search input {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    width: 220px;
+}
+
+/* 🔥 SECTION */
+.section {
+    margin: 20px;
+}
+
+.section h2 {
+    margin-bottom: 10px;
+}
+
+/* 🔥 ROW */
+.row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+/* hide scrollbar */
+.row::-webkit-scrollbar {
+    display: none;
+}
+
+/* 🔥 MOVIE CARD */
+.movie {
+    min-width: 180px;
+    height: 260px;
+    border-radius: 12px;
+    overflow: hidden;   /* 🔥 important */
+    cursor: pointer;
+    transition: 0.3s;
+    background: black;  /* fallback */
+}
+
+.movie img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* 🔥 MOST IMPORTANT */
+    display: block;
+}
+
+/* hover effect */
+.movie:hover {
+    transform: scale(1.1);
+}
+
+.search {
+  position: relative;
+}
+
+#clearSearch {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#searchResults {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+  overflow-x: hidden;   /* 🔥 IMPORTANT */
+  background: black;
+  z-index: 999;
+}
+
+#searchResults img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border-radius: 6px;
+}
+
+#resultRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px 40px;
+}
+
+#resultRow .movie {
+  width: 180px;          /* same as homepage */
+  height: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+#resultRow .movie img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* IMPORTANT */
+  border-radius: 12px;
+}
+
+#searchResults h2 {
+  margin-bottom: 20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- 🔥 HEADER -->
+<div class="header">
+    <div class="logo">NETFLIX</div>
+    
+    <div class="search">
+       <input type="text" id="searchBar" placeholder="Search the movies">
+       <span id="clearSearch">✖</span>
+    </div>
+    <div id="searchResults" style="display:none;">
+       <h2 style="color:white; margin-left:20px;">Search Results</h2>
+       <div id="resultRow"></div>
+    </div>
+</div>
+
+<!-- 🔥 MOVIE SECTIONS -->
+
+<!-- Bollywood -->
+<div class="section">
+<h2>Bollywood</h2>
+<div class="row">
+<div class="movie" data-title="Jawan" onclick="playTrailer('COv52Qyctws')"><img src="netflix/Bollywood/Jawan.jpg"></div>
+<div class="movie" data-title="Bajrangi Bhaijaan" onclick="playTrailer('4nwAra0mz_Q')"><img src="netflix/Bollywood/Bajrangi Bhaijaan.jpg"></div>
+<div class="movie" data-title="Dhurandhar" onclick="playTrailer('BKOVzHcjEIo')"><img src="netflix/Bollywood/Dhurandhar.jpg"></div>
+<div class="movie" data-title="Happy New Year" onclick="playTrailer('u0mrzMQJMQ8')"><img src="netflix/Bollywood/Happy New Year.jpg"></div>
+<div class="movie" data-title="Ae Dil Hai Mushkil" onclick="playTrailer('Z_PODraXg4E')"><img src="netflix/Bollywood/Ae Dil Hai Mushkil.jpg"></div>
+<div class="movie" data-title="Om Shanti Om" onclick="playTrailer('9oeGoQGt7Ao')"><img src="netflix/Bollywood/Om Shanti Om.jpg"></div>
+<div class="movie" data-title="Student Of The Year" onclick="playTrailer('fivOhPjX9YM')"><img src="netflix/Bollywood/Student Of The Year.jpg"></div>
+<div class="movie" data-title="Taare Zameen Par" onclick="playTrailer('l5mP7W58AsI')"><img src="netflix/Bollywood/Taare Zameen Par.jpeg"></div>
+<div class="movie" data-title="URI The Surgical Strike" onclick="playTrailer('Cg8sbRFS3zU')"><img src="netflix/Bollywood/URI The Surgical Strike.jpg"></div>
+<div class="movie" data-title="Zindagi Na Milegi Dobara" onclick="playTrailer('FJrpcDgC3zU')"><img src="netflix/Bollywood/Zindagi Na Milegi Dobara.jpg"></div>
+</div>
+</div>
+
+<!-- Action -->
+<div class="section">
+    <h2>Action-Packed</h2>
+    <div class="row">
+        <div class="movie" data-title="Don2" onclick="playTrailer('_X5w-6PqoZ0')"><img src="netflix/Action-Packed/Don2.jpg"></div>
+        <div class="movie" data-title="Animal" onclick="playTrailer('8FkLRUJj-o0')"><img src="netflix/Action-Packed/Animal.jpg"></div>
+        <div class="movie" data-title="Bahubali2 The Conclusion" onclick="playTrailer('G62HrubdD6o')"><img src="netflix/Action-Packed/Bahubali2 The Conclusion.jpg"></div>
+        <div class="movie" data-title="War" onclick="playTrailer('tQ0mzXRk-oM')"><img src="netflix/Action-Packed/War.jpg"></div>
+        <div class="movie" data-title="Dhoom3" onclick="playTrailer('yeF_b8EQcK0')"><img src="netflix/Action-Packed/Dhoom3.jpg"></div>
+        <div class="movie" data-title="RRR" onclick="playTrailer('f_vbAtFSEc0')"><img src="netflix/Action-Packed/RRR.jpg"></div>
+        <div class="movie" data-title="Tiger Zinda Hai" onclick="playTrailer('ePO5M5DE01I')"><img src="netflix/Action-Packed/Tiger Zinda Hai.jpg"></div>
+        <div class="movie" data-title="Sooryavanshi" onclick="playTrailer('u5r77-OQwa8')"><img src="netflix/Action-Packed/Sooryavanshi.jpg"></div>
+        <div class="movie" data-title="Krrish3" onclick="playTrailer('_6Ix1VF_yWM')"><img src="netflix/Action-Packed/Krrish3.jpg"></div>
+        <div class="movie" data-title="Fighter" onclick="playTrailer('6amIq_mP4xM')"><img src="netflix/Action-Packed/Fighter.jpg"></div>
+    </div>
+</div>
+
+<!-- Romance -->
+<div class="section">
+    <h2>Romance</h2>
+    <div class="row">
+        <div class="movie" data-title="Dilwale Dulhania Le Jaayenge" onclick="playTrailer('oIZ4U21DRlM')"><img src="netflix/Romance/Dilwale Dulhania Le Jaayenge.jpg"></div>
+        <div class="movie" data-title="Veer Zaara" onclick="playTrailer('OSaVImLnnsw')"><img src="netflix/Romance/Veer Zaara.jpg"></div>
+        <div class="movie" data-title="Badrinath Ki Dulhania" onclick="playTrailer('ztX-iGlZ_Ug')"><img src="netflix/Romance/Badrinath Ki Dulhania.jpg"></div>
+        <div class="movie" data-title="Fanaa" onclick="playTrailer('kofrlCHyiaU')"><img src="netflix/Romance/Fanaa.jpg"></div>
+        <div class="movie" data-title="Dilwale" onclick="playTrailer('AHuOo1DLcRc')"><img src="netflix/Romance/Dilwale.jpg"></div>
+        <div class="movie" data-title="Kuch Kuch Hota Hai" onclick="playTrailer('pGnkWAB6_KU')"><img src="netflix/Romance/Kuch Kuch Hota Hai.jpg"></div>
+        <div class="movie" data-title="Mujhse Dosti Karogi" onclick="playTrailer('2GP9HNBxW7U')"><img src="netflix/Romance/Mujhse Dosti Karogi.jpg"></div>
+        <div class="movie" data-title="Mohabbatein" onclick="playTrailer('6pbG4aVrs5E')"><img src="netflix/Romance/Mohabbatein.jpg"></div>
+        <div class="movie" data-title="Rab Ne Bana Di Jodi" onclick="playTrailer('eBi8syxPd14')"><img src="netflix/Romance/Rab Ne Bana Di Jodi.jpg"></div>
+        <div class="movie" data-title="Saathiya" onclick="playTrailer('WZlIWvEmx3s')"><img src="netflix/Romance/Saathiya.jpg"></div>
+    </div>
+</div>
+
+<!-- Thriller -->
+<div class="section">
+    <h2>Thriller / Mystery</h2>
+    <div class="row">
+        <div class="movie" data-title="A Wednesday" onclick="playTrailer('oII-vaL3mZg')"><img src="netflix/Thriller Mystery/A Wednesday.jpg"></div>
+        <div class="movie" data-title="Andhadhun" onclick="playTrailer('2iVYI99VGaw')"><img src="netflix/Thriller Mystery/Andhadhun.jpg"></div>
+        <div class="movie" data-title="Drishyam" onclick="playTrailer('64xJLmcA2K8')"><img src="netflix/Thriller Mystery/Drishyam.jpg"></div>
+        <div class="movie" data-title="Sector 36" onclick="playTrailer('eES65pr2POM')"><img src="netflix/Thriller Mystery/Sector 36.jpg"></div>
+        <div class="movie" data-title="Talaash" onclick="playTrailer('M97P3zoUIos')"><img src="netflix/Thriller Mystery/Talaash.jpg"></div>
+        <div class="movie" data-title="Haseen Dilruba" onclick="playTrailer('lt_bDfnXKGM')"><img src="netflix/Thriller Mystery/Haseen Dilruba.jpg"></div>
+        <div class="movie" data-title="Monica O My Darling" onclick="playTrailer('AQubo_u_jec')"><img src="netflix/Thriller Mystery/Monica, O My Darling.jpg"></div>
+        <div class="movie" data-title="Badla" onclick="playTrailer('xHWQiok-ei0')"><img src="netflix/Thriller Mystery/Badla.jpg"></div>
+        <div class="movie" data-title="Khufiya" onclick="playTrailer('ByojhBwG_-E')"><img src="netflix/Thriller Mystery/Khufiya.jpg"></div>
+        <div class="movie" data-title="The Buckingham Murders" onclick="playTrailer('GvfCCm0ap3Y')"><img src="netflix/Thriller Mystery/The Buckingham Murders.jpeg"></div>
+    </div>
+</div>
+
+<!-- Sci-Fi -->
+<div class="section">
+    <h2>Sci-Fi / Fantasy</h2>
+    <div class="row">
+        <div class="movie" data-title="PK" onclick="playTrailer('SOXWc32k4zA')"><img src="netflix/Sci-fi fantasy/PK.jpg"></div>
+        <div class="movie" data-title="OMG Oh My God" onclick="playTrailer('S3b7F4rGre0')"><img src="netflix/Sci-fi fantasy/OMG Oh My God.jpg"></div>
+        <div class="movie" data-title="Kantara" onclick="playTrailer('6oKFao0aISA')"><img src="netflix/Sci-fi fantasy/Kantara.jpg"></div>
+        <div class="movie" data-title="Kalki 2898 AD" onclick="playTrailer('aninoDcPWo4')"><img src="netflix/Sci-fi fantasy/Kalki 2898 AD.jpg"></div>
+        <div class="movie" data-title="Eega" onclick="playTrailer('x-1ZoU1xB4I')"><img src="netflix/Sci-fi fantasy/Eega.jpg"></div>
+        <div class="movie" data-title="Paheli" onclick="playTrailer('hOJtqHRIymQ')"><img src="netflix/Sci-fi fantasy/Paheli.jpg"></div>
+        <div class="movie" data-title="Adipurush" onclick="playTrailer('scNmYjoR-qM')"><img src="netflix/Sci-fi fantasy/Adipurush.jpg"></div>
+    </div>
+</div>
+
+<!-- Comedy -->
+<div class="section">
+    <h2>Comedy</h2>
+    <div class="row">
+        <div class="movie" data-title="Chennai Express" onclick="playTrailer('hZGR5Sj1Bfo')"><img src="netflix/Comedy/Chennai Express.jpg"></div>
+        <div class="movie" data-title="Yeh Jawani Hai Deewani" onclick="playTrailer('Rbp2XUSeUNE')"><img src="netflix/Comedy/Yeh Jawani Hai Deewani.jpg"></div>
+        <div class="movie" data-title="Phir Hera Pheri" onclick="playTrailer('Im_lCAsA27Q')"><img src="netflix/Comedy/Phir Hera Pheri.jpg"></div>
+        <div class="movie" data-title="Bhool Bhulaiyaa" onclick="playTrailer('ss-7iGf1xE8')"><img src="netflix/Comedy/Bhool Bhulaiyaa.jpg"></div>
+        <div class="movie" data-title="Bhool Bhulaiyaa 2" onclick="playTrailer('P2KRKxAb2ek')"><img src="netflix/Comedy/Bhool Bhulaiyaa 2.jpg"></div>
+        <div class="movie" data-title="Kal Ho Naa Ho" onclick="playTrailer('tVMAQAsjsOU')"><img src="netflix/Comedy/Kal Ho Naa Ho.jpg"></div>
+        <div class="movie" data-title="Chup Chup Ke" onclick="playTrailer('CZwUzVuIz58')"><img src="netflix/Comedy/Chup Chup Ke.jpg"></div>
+        <div class="movie" data-title="Son Of Sardaar 2" onclick="playTrailer('HSX_KPfbP1o')"><img src="netflix/Comedy/Son of Sardaar 2.jpg"></div>
+        <div class="movie" data-title="Laapataa Ladies" onclick="playTrailer('tF1JN2pT_sM')"><img src="netflix/Comedy/Laapataa Ladies.jpg"></div>
+        <div class="movie" data-title="Fukrey" onclick="playTrailer('V9qgeeO7tMk')"><img src="netflix/Comedy/Fukrey.jpg"></div>
+    </div>
+</div>
+
+<!-- Drama -->
+<div class="section">
+    <h2>Drama</h2>
+    <div class="row">
+        <div class="movie" data-title="Swades" onclick="playTrailer('vc7AZNWvs0M')"><img src="netflix/Drama/Swades.jpg"></div>
+        <div class="movie" data-title="Barfi!" onclick="playTrailer('fDpjzEKJjsM')"><img src="netflix/Drama/Barfi!.jpg"></div>
+        <div class="movie" data-title="The Lunchbox" onclick="playTrailer('sK3R0rvnlPs')"><img src="netflix/Drama/The Lunchbox.jpg"></div>
+        <div class="movie" data-title="Jab Tak Hai Jaan" onclick="playTrailer('v0UXgoJ9Shg')"><img src="netflix/Drama/Jab Tak Hai Jaan.jpg"></div>
+        <div class="movie" data-title="Udaan" onclick="playTrailer('wEJxe2bE-cE')"><img src="netflix/Drama/Udaan.jpg"></div>
+        <div class="movie" data-title="Darlings" onclick="playTrailer('Dmx5KDOpqeg')"><img src="netflix/Drama/Darlings.jpg"></div>
+        <div class="movie" data-title="Dear Zindagi" onclick="playTrailer('QJB04mMyTTo')"><img src="netflix/Drama/Dear Zindagi.jpg"></div>
+        <div class="movie" data-title="Queen" onclick="playTrailer('Kj9jAHUIH_8')"><img src="netflix/Drama/Queen.jpg"></div>
+        <div class="movie" data-title="Masaan" onclick="playTrailer('SKJfBo3xMW0')"><img src="netflix/Drama/Masaan.jpg"></div>
+        <div class="movie" data-title="12th Fail" onclick="playTrailer('KjbtuqENvVE')"><img src="netflix/Drama/12th Fail.jpg"></div>
+    </div>
+</div>
+
+<!-- Horror -->
+<div class="section">
+    <h2>Horror</h2>
+    <div class="row">
+        <div class="movie" data-title="Shaitaan" onclick="playTrailer('upDhKSx7P7E')"><img src="netflix/Horror/Shaitaan.jpg"></div>
+        <div class="movie" data-title="Stree" onclick="playTrailer('gzeaGcLLl_A')"><img src="netflix/Horror/Stree.jpg"></div>
+        <div class="movie" data-title="Game Over" onclick="playTrailer('BY-R6NcnkbE')"><img src="netflix/Horror/Game Over.jpg"></div>
+        <div class="movie" data-title="Bhool Bhulaiyaa 3" onclick="playTrailer('6YMY62tMLUA')"><img src="netflix/Horror/Bhool Bhulaiyaa 3.jpg"></div>
+        <div class="movie" data-title="Roohi" onclick="playTrailer('6cOYaRRrF8I')"><img src="netflix/Horror/Roohi.jpg"></div>
+        <div class="movie" data-title="Ghost Stories" onclick="playTrailer('hsab-HJ7kqc')"><img src="netflix/Horror/Ghost Stories.jpg"></div>
+        
+    </div>
+</div>
+
+<!-- Period -->
+<div class="section">
+    <h2>Period</h2>
+    <div class="row">
+        <div class="movie" data-title="Chhaava" onclick="playTrailer('77vRyWNqZjM')"><img src="netflix/Period/Chhaava.jpg"></div>
+        <div class="movie" data-title="Jodhaa Akbar" onclick="playTrailer('lKACNzDVE3o')"><img src="netflix/Period/Jodhaa Akbar.jpg"></div>
+        <div class="movie" data-title="Asoka" onclick="playTrailer('y_zTqTW-npg')"><img src="netflix/Period/Asoka.jpg"></div>
+        <div class="movie" data-title="The Legend Of Bhagat Singh" onclick="playTrailer('QTPi3cyb1N4')"><img src="netflix/Period/The Legend Of Bhagat Singh.jpg"></div>
+        <div class="movie" data-title="Maharaj" onclick="playTrailer('aFPRKT7ILtk')"><img src="netflix/Period/Maharaj.jpg"></div>
+        <div class="movie" data-title="Mission Raniganj" onclick="playTrailer('QFf91hnpClI')"><img src="netflix/Period/Mission Raniganj.jpg"></div>
+        <div class="movie" data-title="Raazi" onclick="playTrailer('YjMSttRJrhA')"><img src="netflix/Period/Raazi.jpg"></div>
+        <div class="movie" data-title="Rang De Basanti" onclick="playTrailer('QHhnhqxB4E8')"><img src="netflix/Period/Rang De Basanti.jpg"></div>
+        <div class="movie" data-title="Panipat" onclick="playTrailer('zpXnmy-6w1g')"><img src="netflix/Period/Panipat.jpg"></div>
+        <div class="movie" data-title="Jogi" onclick="playTrailer('X3VgZVsvt-U')"><img src="netflix/Period/Jogi.jpg"></div>
+    </div>
+</div>
+
+<!-- Biography -->
+<div class="section">
+    <h2>Biography</h2>
+    <div class="row">
+        <div class="movie" data-title="Dangal" onclick="playTrailer('x_7YlGv9u1g')"><img src="netflix/Biography/Dangal.jpg"></div>
+        <div class="movie" data-title="Sanju" onclick="playTrailer('1J76wN0TPI4')"><img src="netflix/Biography/Sanju.jpg"></div>
+        <div class="movie" data-title="Paan Singh Tomar" onclick="playTrailer('TT--NbNqiHE')"><img src="netflix/Biography/Paan Singh Tomar.jpg"></div>
+        <div class="movie" data-title="Gangubai Kathiawadi" onclick="playTrailer('N1ZwRv3vJJY')"><img src="netflix/Biography/Gangubai Kathiawadi.jpg"></div>
+        <div class="movie" data-title="Gunjan Saxena The Kargil Girl" onclick="playTrailer('rtGIq9Xjnrw')"><img src="netflix/Biography/Gunjan Saxena The Kargil Girl.jpg"></div>
+        <div class="movie" data-title="Padman" onclick="playTrailer('K9ujx8vO_A')"><img src="netflix/Biography/Padman.jpg"></div>
+        <div class="movie" data-title="Mary Kom" onclick="playTrailer('Edm6WJOi0jE')"><img src="netflix/Biography/Mary Kom.jpg"></div>
+    </div>
+</div>
+
+<!-- Sports Drama -->
+<div class="section">
+    <h2>Sports Drama</h2>
+    <div class="row">
+        <div class="movie" data-title="Chak De India" onclick="playTrailer('6a0-dSMWm5g')"><img src="netflix/Sports Drama/Chak De India.jpg"></div>
+        <div class="movie" data-title="83" onclick="playTrailer('QHdkC6Kn0Io')"><img src="netflix/Sports Drama/83.jpg"></div>
+        <div class="movie" data-title="Lagaan" onclick="playTrailer('Nhi4Azs2nEw')"><img src="netflix/Sports Drama/Lagaan.jpg"></div>
+        <div class="movie" data-title="Sultan" onclick="playTrailer('wPxqcq6Byq0')"><img src="netflix/Sports Drama/Sultan.jpg"></div>
+        <div class="movie" data-title="Jersey" onclick="playTrailer('BT0zd0kmTxM')"><img src="netflix/Sports Drama/Jersey.jpg"></div>
+        <div class="movie" data-title="Soorma" onclick="playTrailer('c7MwlTFQBEQ')"><img src="netflix/Sports Drama/Soorma.jpg"></div>
+    </div>
+</div>
+
+<!-- Animation -->
+<div class="section">
+    <h2>Animation</h2>
+    <div class="row">
+        <div class="movie" data-title="Mahavatar Narsimha" onclick="playTrailer('u7OxDaU_qcA')"><img src="netflix/Animations/Mahavatar Narsimha.jpg"></div>
+        <div class="movie" data-title="Motu Patlu In Octopus World" onclick="playTrailer('u6bHzRWnsIs')"><img src="netflix/Animations/Motu Patlu In Octopus World.jpg"></div>
+        <div class="movie" data-title="Motu Patlu King Of Kings" onclick="playTrailer('TTGoiToTac0')"><img src="netflix/Animations/Motu Patlu King Of Kings.jpg"></div>
+        <div class="movie" data-title="Motu Patlu Mission Moon" onclick="playTrailer('tzGdMhQalFU')"><img src="netflix/Animations/Motu Patlu Mission Moon.jpg"></div>
+        <div class="movie" data-title="Return Of Hanuman" onclick="playTrailer('SIR5utAOnlQ')"><img src="netflix/Animations/Return Of Hanuman.jpg"></div>
+        <div class="movie" data-title="Chhota Bheem And Krishna" onclick="playTrailer('P-SaezBnQ2g')"><img src="netflix/Animations/Chhota Bheem And Krishna.jpg"></div>
+        <div class="movie" data-title="Chhota Bheem And The Curse Of Damyaan" ><img src="netflix/Animations/Chhota Bheem And The Curse Of Damyaan.jpg"></div>
+        <div class="movie" data-title="Chhota Bheem Journey To Petra" onclick="playTrailer('5MJYxGeq7x4')"><img src="netflix/Animations/Chhota Bheem Journey To Petra.jpg"></div>
+        <div class="movie" data-title="Mighty Little Bheem" onclick="playTrailer('4qXoR6MrVwg')"><img src="netflix/Animations/Mighty Little Bheem.jpg"></div>
+        <div class="movie" data-title="Shiva The Secret World Of Vedas City" onclick="playTrailer('iUH-3h7Pefs')"><img src="netflix/Animations/Shiva The Secret World Of Vedas City.jpg"></div>
+    </div>
+</div>
+
+<!-- TRAILER POPUP -->
+<div id="trailerPopup" style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+">
+
+    <div style="position:relative; width:80%; max-width:900px;">
+        
+        <!-- CLOSE BUTTON -->
+        <span onclick="closeTrailer()" style="
+            position:absolute;
+            top:-30px;
+            right:0;
+            color:white;
+            font-size:30px;
+            cursor:pointer;
+        ">✖</span>
+
+        <!-- YOUTUBE IFRAME -->
+        <iframe id="trailerFrame"
+            width="100%"
+            height="500"
+            src=""
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+</div>
+<script>
+
+// 🎬 EXISTING TRAILER FUNCTION (UNCHANGED)
+function playTrailer(videoId) {
+  const popup = document.getElementById("trailerPopup");
+  const frame = document.getElementById("trailerFrame");
+
+  frame.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+  popup.style.display = "flex";
+}
+
+function closeTrailer() {
+  const popup = document.getElementById("trailerPopup");
+  const frame = document.getElementById("trailerFrame");
+
+  frame.src = "";
+  popup.style.display = "none";
+}
+
+
+// 🔍 IMPROVED SEARCH FUNCTION
+const searchBar = document.getElementById("searchBar");
+const resultBox = document.getElementById("searchResults");
+const resultRow = document.getElementById("resultRow");
+
+searchBar.addEventListener("input", function () {
+  const input = this.value.trim().toLowerCase();
+
+  // clear previous results completely
+  resultRow.innerHTML = "";
+
+  // if empty → go back to homepage
+  if (input === "") {
+    resultBox.style.display = "none";
+
+    document.querySelectorAll(".section").forEach(sec => {
+      sec.style.display = "block";
+    });
+
+    return;
+  }
+
+  const movies = document.querySelectorAll(".movie");
+
+  let seen = new Set(); // ✅ prevents duplicates
+
+  movies.forEach(movie => {
+    const title = movie.getAttribute("data-title");
+
+    if (title && title.toLowerCase().includes(input)) {
+
+      // ✅ avoid duplicates
+      if (!seen.has(title)) {
+        seen.add(title);
+
+        const clone = movie.cloneNode(true);
+        resultRow.appendChild(clone);
+      }
+    }
+  });
+
+  // show results
+  resultBox.style.display = "block";
+
+  // hide homepage sections
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.display = "none";
+  });
+});
+const clearBtn = document.getElementById("clearSearch");
+
+clearBtn.onclick = () => {
+  searchBar.value = "";
+  resultRow.innerHTML = "";
+  resultBox.style.display = "none"; 
+
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.display = "block";
+  });
+};
+
+
+</script>
+</body>
+</html>
