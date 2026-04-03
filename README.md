@@ -105,7 +105,7 @@ StreamSphere-ott/
 
 ## 🌐 Live Demo
 
-(Add your GitHub Pages link here after deployment)
+https://aakarshagrawal99.github.io/StreamSphere-ott/
 
 ---
 
