@@ -112,22 +112,9 @@
     </div>
 </div>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
 
 <script>
-// 🔥 REPLACE WITH YOUR FIREBASE CONFIG
-const firebaseConfig = {
-  apiKey: "AIzaSyCe5KOK2e_5DuTsSkCmMvzSOdc5q0n-v2g",
-  authDomain: "streamsphere-b8a5e.firebaseapp.com",
-  projectId: "streamsphere-b8a5e",
-  appId: "1:667078410126:web:980f0a1ce51915065d2edf"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
 
 // =======================
 // ✅ EMAIL LOGIN
@@ -167,30 +154,23 @@ emailInput.addEventListener("keypress", function(e) {
     }
 });
 
-
 // =======================
-// ✅ GOOGLE LOGIN
+// ✅ GOOGLE LOGIN (SIMULATED)
 // =======================
 const googleBtn = document.getElementById("googleBtn");
 
 googleBtn.onclick = () => {
+    googleBtn.innerText = "Signing in...";
+    googleBtn.disabled = true;
 
-    const provider = new firebase.auth.GoogleAuthProvider();
+    setTimeout(() => {
+        localStorage.setItem("userEmail", "googleuser@gmail.com");
+        localStorage.setItem("userName", "Google User");
 
-    auth.signInWithPopup(provider)
-        .then(result => {
-
-            const user = result.user;
-
-            localStorage.setItem("userEmail", user.email);
-            localStorage.setItem("userName", user.displayName);
-
-            window.location.href = "platform.html";
-        })
-        .catch(error => {
-            alert(error.message);
-        });
+        window.location.href = "platform.html";
+    }, 1500);
 };
+
 </script>
 
 </body>
