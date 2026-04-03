@@ -118,3 +118,8 @@ StreamSphere-ott/
 ## 📌 Note
 
 This project is created for educational and demonstration purposes only. It replicates the UI/UX of OTT platforms and does not host or distribute copyrighted content.
+
+---
+
+## 📄 License
+This project is licensed under the MIT License.
