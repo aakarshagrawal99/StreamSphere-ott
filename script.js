@@ -1,6 +1,6 @@
 // Firebase configuration (your real values)
 const firebaseConfig = {
-  apiKey: "AIzaSyCe5KOK2e_5DuTsSkCmMvzSOdc5q0n-v2g",
+  apiKey: "Api_key",
   authDomain: "streamsphere-b8a5e.firebaseapp.com",
   projectId: "streamsphere-b8a5e",
   storageBucket: "streamsphere-b8a5e.firebasestorage.app",
